@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bible Verses Game</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    #verse-display {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+</style>
+</head>
+<body>
+<h1>Bible Verses Game</h1>
+<p>Click the button below to see Bible verses based on different emotions.</p>
+<button onclick="generateVerse()">Generate Verse</button>
+<div id="verse-display"></div>
+<div id="points">Points: <span id="point-count">0</span></div>
+
+<script>
+    // Bible verses for different emotions
+    const verses = {
+        scared: [
+            "Isaiah 41:10 - Fear not, for I am with you; be not dismayed, for I am your God; I will strengthen you, I will help you, I will uphold you with my righteous right hand.",
+            "Psalm 23:4 - Even though I walk through the valley of the shadow of death, I will fear no evil, for you are with me; your rod and your staff, they comfort me."
+        ],
+        happy: [
+            "Philippians 4:4 - Rejoice in the Lord always; again I will say, rejoice.",
+            "Psalm 144:15 - Blessed are the people to whom such blessings fall! Blessed are the people whose God is the Lord!"
+        ],
+        unfaithful: [
+            "Hebrews 13:5 - Keep your life free from love of money, and be content with what you have, for he has said, “I will never leave you nor forsake you.”",
+            "James 1:6 - But let him ask in faith, with no doubting, for the one who doubts is like a wave of the sea that is driven and tossed by the wind."
+        ],
+        sad: [
+            "Psalm 34:18 - The Lord is near to the brokenhearted and saves the crushed in spirit.",
+            "Matthew 5:4 - Blessed are those who mourn, for they shall be comforted."
+        ],
+        mad: [
+            "Proverbs 15:1 - A soft answer turns away wrath, but a harsh word stirs up anger.",
+            "Ephesians 4:26 - Be angry and do not sin; do not let the sun go down on your anger."
+        ]
+    };
+
+    // Function to generate a random verse based on the chosen emotion
+    function generateVerse() {
+        const emotions = Object.keys(verses);
+        const randomEmotion = emotions[Math.floor(Math.random() * emotions.length)];
+        const verseList = verses[randomEmotion];
+        const randomVerse = verseList[Math.floor(Math.random() * verseList.length)];
+        const verseDisplay = document.getElementById('verse-display');
+        const pointCount = document.getElementById('point-count');
+        const verseLength = randomVerse.length;
+        const points = Math.floor(Math.random() * (verseLength * 5) + 50); // Points based on verse length
+
+        verseDisplay.innerHTML = `<strong>${randomEmotion.toUpperCase()}</strong><br>${randomVerse}`;
+        pointCount.textContent = parseInt(pointCount.textContent) + points;
+    }
+</script>
+</body>
+</html>
